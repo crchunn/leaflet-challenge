@@ -31,14 +31,21 @@ var epicenter = "https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/4.5_m
 
 d3.json(epicenter, function(response) {
   console.log(response);
+  var markers = L.markerClusterGroup();
 
   for (var i = 0; i < response.length; i++) {
-    var location = response[i].location;
+
+    var location = response[i].geometry;
 
     if (location) {
-      L.marker([location.coordinates[1], location.coordinates[0]]).addTo(myMap);
+
+      markers.addLayer(L.marker([geometry.coordinates[1], geometry.coordinates[0]])
+      .bindPopup(response[i].properties));
     }
   }
+  myMap.addLayer(markers);
+
+
 })
 
 
@@ -54,3 +61,5 @@ d3.json(epicenter, function(response) {
   }).bindPopup("<h1>" + cities[i].name + "</h1> <hr> <h3>Population: " + cities[i].population + "</h3>").addTo(myMap);
 }
  */
+/* var myLayer = L.geoJSON().addTo(map);
+myLayer.addData(geojsonFeature); */
