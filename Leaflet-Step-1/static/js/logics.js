@@ -16,34 +16,90 @@ function createFeatures(earthquakeData) {
 
     // Define a function we want to run once for each feature in the features array
     // Give each feature a popup describing the place and time of the earthquake
+
+  
+   /*  function style(feature) {
+        return {
+            fillColor: getColor(feature.properties.density),
+            weight: 2,
+            opacity: 1,
+            color: 'white',
+            dashArray: '3',
+            fillOpacity: 0.7
+        };
+    }
+    
+    L.geoJson(statesData, {style: style}).addTo(map); */
+/*     var legend = L.control({position: 'bottomright'});
+
+    legend.onAdd = function (map) {
+    
+        var div = L.DomUtil.create('div', 'info legend'),
+            grades = [0, 10, 20, 50, 100, 200, 500, 1000],
+            labels = [];
+    
+        // loop through our density intervals and generate a label with a colored square for each interval
+        for (var i = 0; i < grades.length; i++) {
+            div.innerHTML +=
+                '<i style="background:' + getColor(grades[i] + 1) + '"></i> ' +
+                grades[i] + (grades[i + 1] ? '&ndash;' + grades[i + 1] + '<br>' : '+');
+        }
+    
+        return div;
+    };
+    
+    legend.addTo(map); */
+
+  function getColor(d) {
+        return d > 1000 ?  :
+               d > 500  ?  :
+               d > 200  ?  :
+               d > 100  ?  :
+               d > 50   ?  :
+               d > 20   ?  :
+               d > 10   ?  :
+                          ;
+    }
     function colors(mag) {
         // Conditionals for countries points
-        if (mag > 5.5) {
-            return "yellow";
+        if (mag > 8.0) {
+            return '#800026';
+        }
+        else if (mag > 7.5) {
+            return '#BD0026';
+        }
+        else if (mag > 7.0) {
+            return '#E31A1C';
+        }
+        else if (mag > 6.5) {
+            return '#FC4E2A';
+        }
+        else if (mag > 6.0) {
+            return '#FD8D3C';
+        }
+        else if (mag > 5.5) {
+            return '#FEB24C';
         }
         else if (mag > 5.0) {
-            return "blue";
-        }
-        else if (mag > 4.7) {
-            return "green";
+            return '#FED976';
         }
         else {
-            return "red";
+            return '#FFEDA0';
         }
 
     };
     function radio(mag) {
         if (mag > 5.5) {
-            return 15;
+            return 20;
         }
         else if (mag > 5.0) {
-            return 10;
+            return 15;
         }
         else if (mag > 4.7) {
-            return 7;
+            return 10;
         }
         else {
-            return 4;
+            return 5;
         }
     }
 
@@ -56,7 +112,7 @@ function createFeatures(earthquakeData) {
             // Adjust radius
         })
     }
-
+// bind it to the popup
     function onEachFeature(feature, layer) {
 
 
