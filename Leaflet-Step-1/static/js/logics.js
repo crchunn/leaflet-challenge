@@ -17,49 +17,10 @@ function createFeatures(earthquakeData) {
     // Define a function we want to run once for each feature in the features array
     // Give each feature a popup describing the place and time of the earthquake
 
-  
-   /*  function style(feature) {
-        return {
-            fillColor: getColor(feature.properties.density),
-            weight: 2,
-            opacity: 1,
-            color: 'white',
-            dashArray: '3',
-            fillOpacity: 0.7
-        };
-    }
-    
-    L.geoJson(statesData, {style: style}).addTo(map); */
-/*     var legend = L.control({position: 'bottomright'});
 
-    legend.onAdd = function (map) {
-    
-        var div = L.DomUtil.create('div', 'info legend'),
-            grades = [0, 10, 20, 50, 100, 200, 500, 1000],
-            labels = [];
-    
-        // loop through our density intervals and generate a label with a colored square for each interval
-        for (var i = 0; i < grades.length; i++) {
-            div.innerHTML +=
-                '<i style="background:' + getColor(grades[i] + 1) + '"></i> ' +
-                grades[i] + (grades[i + 1] ? '&ndash;' + grades[i + 1] + '<br>' : '+');
-        }
-    
-        return div;
-    };
-    
-    legend.addTo(map); */
 
- /*  function getColor(d) {
-        return d > 1000 ?  :
-               d > 500  ?  :
-               d > 200  ?  :
-               d > 100  ?  :
-               d > 50   ?  :
-               d > 20   ?  :
-               d > 10   ?  :
-                          ;
-    } */
+
+
     function colors(mag) {
         // Conditionals for countries points
         if (mag > 7.5) {
@@ -112,7 +73,7 @@ function createFeatures(earthquakeData) {
             // Adjust radius
         })
     }
-// bind it to the popup
+    // bind it to the popup
     function onEachFeature(feature, layer) {
 
 
@@ -120,13 +81,16 @@ function createFeatures(earthquakeData) {
             "</h3><hr><p>" + new Date(feature.properties.time) + feature.properties.mag + "</p>");
     }
 
+
     function geojsonMarkerOptions(feature) {
         return {
             radius: radio(feature.properties.mag),
             fillColor: colors(feature.properties.mag),
             color: colors(feature.properties.mag),
-            weight: 1,
+            weight: 2,
             opacity: 1,
+            color: 'white',
+            dashArray: '3',
             fillOpacity: 0.8
         };
     }
@@ -141,9 +105,9 @@ function createFeatures(earthquakeData) {
             return L.circleMarker(latlng);
         }, style: geojsonMarkerOptions,
         // Sending our earthquakes layer to the createMap function
-      
+
     });
-  createMap(earthquakes)
+    createMap(earthquakes)
 
     function createMap(earthquakes) {
 
@@ -176,6 +140,28 @@ function createFeatures(earthquakeData) {
             zoom: 5,
             layers: [streetmap, earthquakes]
         });
+
+
+        var legend = L.control({ position: 'bottomright' });
+
+        legend.onAdd = function (myMap) {
+
+            var div = L.DomUtil.create('div', 'info legend'),
+                grades = [4.5, 4.7, 5.0, 5.5, 6.0, 6.5, 7.0, 7.5],
+                labels = [];
+
+            // loop through our density intervals and generate a label with a colored square for each interval
+            for (var i = 0; i < grades.length; i++) {
+                div.innerHTML +=
+                    '<i style="background:' + getColor(grades[i] + 1) + '"></i> ' +
+                    grades[i] + (grades[i + 1] ? '&ndash;' + grades[i + 1] + '<br>' : '+');
+            }
+
+            return div;
+        };
+
+        legend.addTo(myMap);
+
 
         // Create a layer control
         // Pass in our baseMaps and overlayMaps
