@@ -50,7 +50,7 @@ function createFeatures(earthquakeData) {
     
     legend.addTo(map); */
 
-  function getColor(d) {
+ /*  function getColor(d) {
         return d > 1000 ?  :
                d > 500  ?  :
                d > 200  ?  :
@@ -59,28 +59,28 @@ function createFeatures(earthquakeData) {
                d > 20   ?  :
                d > 10   ?  :
                           ;
-    }
+    } */
     function colors(mag) {
         // Conditionals for countries points
-        if (mag > 8.0) {
+        if (mag > 7.5) {
             return '#800026';
         }
-        else if (mag > 7.5) {
+        else if (mag > 7.0) {
             return '#BD0026';
         }
-        else if (mag > 7.0) {
+        else if (mag > 6.5) {
             return '#E31A1C';
         }
-        else if (mag > 6.5) {
+        else if (mag > 6.0) {
             return '#FC4E2A';
         }
-        else if (mag > 6.0) {
+        else if (mag > 5.5) {
             return '#FD8D3C';
         }
-        else if (mag > 5.5) {
+        else if (mag > 5.0) {
             return '#FEB24C';
         }
-        else if (mag > 5.0) {
+        else if (mag > 4.7) {
             return '#FED976';
         }
         else {
