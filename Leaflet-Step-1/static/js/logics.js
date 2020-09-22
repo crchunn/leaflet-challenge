@@ -141,7 +141,7 @@ function createFeatures(earthquakeData) {
             layers: [streetmap, earthquakes]
         });
 
-
+        // make sure there is a legend to help the lost wanderers
         var legend = L.control({ position: 'bottomright' });
 
         legend.onAdd = function (myMap) {
